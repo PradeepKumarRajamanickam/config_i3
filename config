@@ -185,12 +185,6 @@ bar {
         status_command i3status
 }
 
-## My config
-# set $ws0 "0: default"
-# set $ws1 "1: grok"
-# set $ws2 "2: chrome"
-# set $ws3 "3: godot"
-
 # paths
 set $p_godot /media/pradeep/Data/Applications/Godot_v4.5.1-stable_linux.x86_64
 set $p_proj /media/pradeep/Data/projects/godot/gdtoolkit/project.godot
