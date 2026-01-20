@@ -121,6 +121,10 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
+# Define the reusable "center mouse" command with focus check and delay
+set $center_mouse exec --no-startup-id sh -c 'sleep 0.1; W=$(xdotool getwindowfocus 2>/dev/null); [ -n "$W" ] && eval $(xdotool getwindowgeometry --shell $W) && xdotool mousemove --window %1 50% 50%'
+
+
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -205,7 +209,6 @@ bindsym $mod+Ctrl+t exec "i3-msg workspace 8; gnome-terminal --role=taskmanager-
 bindsym $mod+Ctrl+p exec "i3-msg workspace 9; gnome-terminal --role=pydoro-role -- pydoro"
 bindsym $mod+Ctrl+l exec "i3-msg workspace 10; gnome-terminal --role=lazygit-role -- lazygit -p /media/pradeep/Data/projects/godot/gdtoolkit"
 
-
 # force
 for_window [window_role="browser"] move to workspace 5
 for_window [window_role="lazygit-role"] move to workspace 10
@@ -213,9 +216,30 @@ for_window [window_role="pydoro-role"] move to workspace 9
 for_window [window_role="taskmanager-role"] move to workspace 8
 
 for_window [class="Nemo"] move to workspace 4
+for_window [class="Code"] move to workspace 1
+
 for_window [class="Godot" instance="Godot_Editor" title="Script Editor - Godot Engine"] move to workspace 2
-for_window [class="Godot" instance="Godot_Editor" title="FileSystem - Godot Engine"] move to workspace 3
+for_window [class="Godot" instance="Godot_Editor" title="Import - Godot Engine"] move to workspace 3
+for_window [class="Godot" instance="Godot_qEditor" title="FileSystem - Godot Engine"] move to workspace 3
+for_window [class="Godot" instance="Godot_Editor" title="Node - Godot Engine"] move to workspace 6
+for_window [class="Godot" instance="Godot_Editor" title="Inspector - Godot Engine"] move to workspace 6
+for_window [class="Godot" instance="Godot_Editor" title="Scene - Godot Engine"] move to workspace 6
 for_window [class="Godot_Editor"] move to workspace 1
+
+# focus
+exec_always --no-startup-id python3 /home/pradeep/.config/i3/scripts/config.py
+
+#bindsym $mod+Mod1+n [class="Nemo"] focus
+#bindsym $mod+Mod1+b [window_role="browser"] focus
+#
+#bindsym $mod+Mod1+1 [class="Godot" instance="Godot_Editor"] focus
+#bindsym $mod+Mod1+3 [class="Godot" instance="Godot_Editor" title="Inspector - Godot Engine"] focus
+#bindsym $mod+Mod1+2 [class="Godot" instance="Godot_Editor" title="Script Editor - Godot Engine"] focus
+#bindsym $mod+Mod1+4 [class="Godot" instance="Godot_Editor" title="Import - Godot Engine"] focus
+#bindsym $mod+Mod1+5 [class="Godot" instance="Godot_Editor" title="FileSystem - Godot Engine"] focus
+#bindsym $mod+Mod1+6 [class="Godot" instance="Godot_Editor" title="Node - Godot Engine"] focus
+#bindsym $mod+Mod1+7 [class="Godot" instance="Godot_Editor" title="Scene - Godot Engine"] focus
+
 
 # startup
 
@@ -227,3 +251,27 @@ exec "gnome-terminal --role=lazygit-role -- lazygit -p /media/pradeep/Data/proje
 
 exec "i3-msg workspace 1; $p_godot $p_proj;"
 exec "i3-msg workspace 1"
+
+
+# multi-monitor
+exec_always --no-startup-id ~/.screenlayout/monitor_setup.sh
+
+set $top_screen HDMI-1
+set $bottom_screen eDP-1
+
+workspace 1 output $top_screen
+workspace 2 output $bottom_screen
+workspace 3 output $bottom_screen
+workspace 4 output $bottom_screen
+workspace 5 output $bottom_screen
+workspace 6 output $bottom_screen
+workspace 7 output $bottom_screen
+workspace 8 output $bottom_screen
+workspace 9 output $bottom_screen
+workspace 0 output $bottom_screen
+
+
+# mouse centering
+mouse_warping output
+exec_always --no-startup-id python3 ~/.config/i3/scripts/center_mouse.py
+
