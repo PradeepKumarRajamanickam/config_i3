@@ -220,7 +220,7 @@ for_window [class="Code"] move to workspace 1
 
 for_window [class="Godot" instance="Godot_Editor" title="Script Editor - Godot Engine"] move to workspace 2
 for_window [class="Godot" instance="Godot_Editor" title="Import - Godot Engine"] move to workspace 3
-for_window [class="Godot" instance="Godot_qEditor" title="FileSystem - Godot Engine"] move to workspace 3
+for_window [class="Godot" instance="Godot_Editor" title="FileSystem - Godot Engine"] move to workspace 3
 for_window [class="Godot" instance="Godot_Editor" title="Node - Godot Engine"] move to workspace 6
 for_window [class="Godot" instance="Godot_Editor" title="Inspector - Godot Engine"] move to workspace 6
 for_window [class="Godot" instance="Godot_Editor" title="Scene - Godot Engine"] move to workspace 6

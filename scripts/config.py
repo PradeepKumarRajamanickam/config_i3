@@ -1,55 +1,37 @@
+#!/usr/bin/env python3
 import i3ipc
+import utils
+# from . import *
 from pynput import keyboard
-import subprocess
+import sys
 
-i3 = i3ipc.Connection()
+P_GODOT="/media/pradeep/Data/Applications/Godot_v4.5.1-stable_linux.x86_64"
+P_PROJ ="/media/pradeep/Data/projects/godot/gdtoolkit/project.godot"
 
-def run_or_focus(criteria, launch_cmd):
-    """
-    Focuses a window matching the i3 criteria. 
-    If not found, executes the launch_cmd.
-    """
-    tree = i3.get_tree()
-    # Find containers matching the criteria (e.g., class="Nemo")
-    # i3ipc allows querying by window_class, window_instance, window_role, etc.
-    windows = tree.find_classed(criteria) if "class" in criteria else []
+CMD_GODOT = f"{P_GODOT} {P_PROJ}"
+
+CLASS_NAME_GODOT = "Godot"
+
+print("Initialising i3 config via python")
+
+i3 = utils.get_i3_connection()
+
+# Global Hotkey Mapping
+# <cmd> = Super/Windows key | <alt> = Alt key
+hotkeys = {
+    '<cmd>+<alt>+n': lambda: utils.run_or_focus("nemo", class_name="Nemo"),
+    '<cmd>+<alt>+b': lambda: utils.run_or_focus("google-chrome-stable", instance="google-chrome"),
     
-    # Generic fallback: manual search if complex criteria like 'instance' or 'role' are used
-    if not windows:
-        for leaf in tree.leaves():
-            if all(getattr(leaf, key, None) == val for key, val in criteria.items()):
-                windows.append(leaf)
+    # Godot Editor Bindings
+    '<cmd>+<alt>+1': lambda: utils.run_or_focus(CMD_GODOT, class_name=CLASS_NAME_GODOT, title=".tscn"),
+    '<cmd>+<alt>+2': lambda: utils.run_or_focus(CMD_GODOT, class_name=CLASS_NAME_GODOT, title="Script Editor"),
+    '<cmd>+<alt>+3': lambda: utils.run_or_focus(CMD_GODOT, class_name=CLASS_NAME_GODOT, title="Inspector"),
+    '<cmd>+<alt>+4': lambda: utils.run_or_focus(CMD_GODOT, class_name=CLASS_NAME_GODOT, title="Import"),
+    '<cmd>+<alt>+5': lambda: utils.run_or_focus(CMD_GODOT, class_name=CLASS_NAME_GODOT, title="FileSystem"),
+    '<cmd>+<alt>+6': lambda: utils.run_or_focus(CMD_GODOT, class_name=CLASS_NAME_GODOT, title="Node"),
+    '<cmd>+<alt>+7': lambda: utils.run_or_focus(CMD_GODOT, class_name=CLASS_NAME_GODOT, title="Scene"),
+}
 
-    if windows:
-        windows[0].command('focus')
-    else:
-        i3.command(f'exec --no-startup-id {launch_cmd}')
-
-# Define your actions
-def focus_nemo():
-    run_or_focus({'window_class': 'Nemo'}, 'nemo')
-
-def focus_browser():
-    # Example for browser using window_role
-    run_or_focus({'window_role': 'browser'}, 'google-chrome-stable')
-
-def focus_godot(title=None):
-    criteria = {'window_class': 'Godot', 'window_instance': 'Godot_Editor'}
-    if title:
-        criteria['name'] = title # 'name' in i3ipc refers to the window title
-    run_or_focus(criteria, 'godot')
-
-# Global Hotkey Mapping (Super+Alt+Key)
-# Note: <cmd> or <win> is used for 'Super' key in pynput
-with keyboard.GlobalHotKeys({
-    '<cmd>+<alt>+n': focus_nemo,
-    '<cmd>+<alt>+b': focus_browser,
-    '<cmd>+<alt>+1': lambda: focus_godot(),
-    '<cmd>+<alt>+2': lambda: focus_godot("Script Editor - Godot Engine"),
-    '<cmd>+<alt>+3': lambda: focus_godot("Inspector - Godot Engine"),
-    '<cmd>+<alt>+4': lambda: focus_godot("Import - Godot Engine"),
-    '<cmd>+<alt>+5': lambda: focus_godot("FileSystem - Godot Engine"),
-    '<cmd>+<alt>+6': lambda: focus_godot("Node - Godot Engine"),
-    '<cmd>+<alt>+7': lambda: focus_godot("Scene - Godot Engine"),
-}) as h:
-    h.join()
+if __name__ == "__main__":
+    with keyboard.GlobalHotKeys(hotkeys) as h:
+        h.join()
