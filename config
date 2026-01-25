@@ -87,10 +87,10 @@ bindsym $super+$shift+Up move up
 bindsym $super+$shift+Right move right
 
 # split in horizontal orientation
-bindsym $super+h split h
+bindsym $super+$shift+h split h
 
 # split in vertical orientation
-bindsym $super+v split v
+bindsym $super+$shift+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $super+f fullscreen toggle
@@ -201,30 +201,32 @@ set $godot $p_godot $p_proj
 # set $default_proj_godot "$p_godot44 $p_proj_fps"
 
 # ... (keybindings, etc.)
+# system behaviour
 bindsym $super+Escape exec "i3-msg exit"
 bindsym $shift+Escape exec "shutdown now"
 bindsym $super+$alt+v $center_mouse
 
-
-
+# basic apps
 bindsym $super+t exec $terminal
 bindsym $super+$ctrl+c exec "code ~/.config/i3/config ~/.config/i3/"
 
+# essential apps
 bindsym $super+n $run_or_focus "nemo" -c "Nemo"
-bindsym $super+b $run_or_focus "google-chrome" -c "google-chrome"
+bindsym $super+b $run_or_focus "google-chrome" -c "Google-chrome"
 
 bindsym $super+k $run_or_focus "$terminal --role=taskmanager -- htop" -r "taskmanager"
 bindsym $super+p $run_or_focus "$terminal --role=pomo -- pydoro" -r "pomo"
-bindsym $super+l $run_or_focus "$terminal --role=vcs -- lazygit -p /media/pradeep/Data/projects/godot/gdtoolkit" -r "vcs"
+bindsym $super+v $run_or_focus "$terminal --role=vcs -- lazygit -p /media/pradeep/Data/projects/godot/gdtoolkit" -r "vcs"
 
-bindsym $super+c $run_or_focus "code"
-bindsym $super+g $run_or_focus $godot -c "Godot"
-bindsym $super+x $run_or_focus $godot -c "Godot" -t "Inspector - Godot Engine"
-# bindsym $super+s $run_or_focus "$godot" -c "Godot" -t "Script Editor - Godot Engine"
-bindsym $super+a $run_or_focus $godot -c "Godot" -t "FileSystem - Godot Engine"
-bindsym $super+z $run_or_focus $godot -c "Godot" -t "Scene - Godot Engine"
-bindsym $super+i $run_or_focus $godot -c "Godot" -t "Import - Godot Engine"
-bindsym $super+o $run_or_focus $godot -c "Godot" -t "Node - Godot Engine"
+# dev apps
+bindsym $super+c $run_or_focus "code" -c "Code"
+bindsym $super+g $run_or_focus $godot -c "Godot_Editor"
+bindsym $super+x $run_or_focus $godot -c "Godot_Editor" -t "Inspector - Godot Engine"
+# bindsym $super+s $run_or_focus "$godot" -c "Godot_Editor" -t "Script Editor - Godot Engine"
+bindsym $super+a $run_or_focus $godot -c "Godot_Editor" -t "FileSystem - Godot Engine"
+bindsym $super+z $run_or_focus $godot -c "Godot_Editor" -t "Scene - Godot Engine"
+bindsym $super+i $run_or_focus $godot -c "Godot_Editor" -t "Import - Godot Engine"
+bindsym $super+o $run_or_focus $godot -c "Godot_Editor" -t "Node - Godot Engine"
 
 # more instance
 bindsym $super+$alt+c $run "code" focus
@@ -233,9 +235,9 @@ bindsym $super+$alt+b $run "google-chrome" focus
 
 # force
 for_window [window_role="browser"] move to workspace 5
-for_window [window_role="lazygit-role"] move to workspace 10
-for_window [window_role="pydoro-role"] move to workspace 9
-for_window [window_role="taskmanager-role"] move to workspace 8
+for_window [window_role="vcs"] move to workspace 10
+for_window [window_role="pomo"] move to workspace 9
+for_window [window_role="taskmanager"] move to workspace 8
 
 for_window [class="Nemo"] move to workspace 4
 for_window [class="Code"] move to workspace 2
@@ -253,8 +255,8 @@ for_window [class="Godot_Editor"] move to workspace 1
 exec "i3-msg workspace 4; nemo"
 exec "i3-msg workspace 4; nemo"
 
-exec "$terminal --role=pydoro-role -- pydoro"
-exec "$terminal --role=lazygit-role -- lazygit -p /media/pradeep/Data/projects/godot/gdtoolkit"
+exec "$terminal --role=pomo -- pydoro"
+exec "$terminal --role=vcs -- lazygit -p /media/pradeep/Data/projects/godot/gdtoolkit"
 
 exec "i3-msg workspace 1; $p_godot $p_proj;"
 exec "i3-msg workspace 1"
