@@ -16,22 +16,22 @@ print("Initialising i3 config via python")
 
 i3 = utils.get_i3_connection()
 
-# Global Hotkey Mapping
-# <cmd> = Super/Windows key | <alt> = Alt key
-hotkeys = {
-    '<cmd>+<alt>+n': lambda: utils.run_or_focus("nemo", class_name="Nemo"),
-    '<cmd>+<alt>+b': lambda: utils.run_or_focus("google-chrome-stable", instance="google-chrome"),
+# # Global Hotkey Mapping
+# # <cmd> = Super/Windows key | <alt> = Alt key
+# hotkeys = {
+#     '<cmd>+<alt>+n': lambda: utils.run_or_focus("nemo", class_name="Nemo"),
+#     '<cmd>+<alt>+b': lambda: utils.run_or_focus("google-chrome-stable", instance="google-chrome"),
     
-    # Godot Editor Bindings
-    '<cmd>+<alt>+1': lambda: utils.run_or_focus(CMD_GODOT, class_name=CLASS_NAME_GODOT, title=".tscn"),
-    '<cmd>+<alt>+2': lambda: utils.run_or_focus(CMD_GODOT, class_name=CLASS_NAME_GODOT, title="Script Editor"),
-    '<cmd>+<alt>+3': lambda: utils.run_or_focus(CMD_GODOT, class_name=CLASS_NAME_GODOT, title="Inspector"),
-    '<cmd>+<alt>+4': lambda: utils.run_or_focus(CMD_GODOT, class_name=CLASS_NAME_GODOT, title="Import"),
-    '<cmd>+<alt>+5': lambda: utils.run_or_focus(CMD_GODOT, class_name=CLASS_NAME_GODOT, title="FileSystem"),
-    '<cmd>+<alt>+6': lambda: utils.run_or_focus(CMD_GODOT, class_name=CLASS_NAME_GODOT, title="Node"),
-    '<cmd>+<alt>+7': lambda: utils.run_or_focus(CMD_GODOT, class_name=CLASS_NAME_GODOT, title="Scene"),
-}
+#     # Godot Editor Bindings
+#     '<cmd>+<alt>+1': lambda: utils.run_or_focus(CMD_GODOT, class_name=CLASS_NAME_GODOT, title=".tscn"),
+#     '<cmd>+<alt>+2': lambda: utils.run_or_focus(CMD_GODOT, class_name=CLASS_NAME_GODOT, title="Script Editor"),
+#     '<cmd>+<alt>+3': lambda: utils.run_or_focus(CMD_GODOT, class_name=CLASS_NAME_GODOT, title="Inspector"),
+#     '<cmd>+<alt>+4': lambda: utils.run_or_focus(CMD_GODOT, class_name=CLASS_NAME_GODOT, title="Import"),
+#     '<cmd>+<alt>+5': lambda: utils.run_or_focus(CMD_GODOT, class_name=CLASS_NAME_GODOT, title="FileSystem"),
+#     '<cmd>+<alt>+6': lambda: utils.run_or_focus(CMD_GODOT, class_name=CLASS_NAME_GODOT, title="Node"),
+#     '<cmd>+<alt>+7': lambda: utils.run_or_focus(CMD_GODOT, class_name=CLASS_NAME_GODOT, title="Scene"),
+# }
 
-if __name__ == "__main__":
-    with keyboard.GlobalHotKeys(hotkeys) as h:
-        h.join()
+# if __name__ == "__main__":
+#     with keyboard.GlobalHotKeys(hotkeys) as h:
+#         h.join()
