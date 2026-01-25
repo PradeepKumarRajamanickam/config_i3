@@ -13,6 +13,7 @@ set $super Mod4
 set $alt Mod1
 set $ctrl Control
 set $shift Shift
+set $terminal gnome-terminal
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -51,7 +52,7 @@ floating_modifier $super
 bindsym $super+Return exec i3-sensible-terminal
 
 # kill focused window
-bindsym $super+$shift+q kill
+bindsym $super+q kill
 
 # start dmenu (a program launcher)
 bindsym $super+d exec --no-startup-id dmenu_run
@@ -195,18 +196,22 @@ set $p_proj /media/pradeep/Data/projects/godot/gdtoolkit/project.godot
 # set $default_proj_godot "$p_godot44 $p_proj_fps"
 
 # ... (keybindings, etc.)
-bindsym $super+$shift+e exec "i3-msg exit"
-bindsym $super+$ctrl+c exec "code ~/.config/i3/config"
+bindsym $super+Escape exec "i3-msg exit"
+bindsym $shift+Escape exec "shutdown now"
+
+bindsym $super+t exec $terminal
+bindsym $super+$ctrl+c exec "code ~/.config/i3/config ~/.config/i3/"
+
 # bindsym $super+$ctrl+a exec "firefox --kiosk https://grok.com"
 
 
 bindsym $super+n exec "i3-msg workspace 4; nemo"
 bindsym $super+b exec "i3-msg workspace 5; google-chrome"
 bindsym $super+g exec "i3-msg workspace 1; $p_godot $p_proj"
-bindsym $super+k exec "i3-msg workspace 8; gnome-terminal --role=taskmanager-role -- htop"
+bindsym $super+k exec "i3-msg workspace 8; $terminal --role=taskmanager-role -- htop"
 
-bindsym $super+p exec "i3-msg workspace 9; gnome-terminal --role=pydoro-role -- pydoro"
-bindsym $super+l exec "i3-msg workspace 10; gnome-terminal --role=lazygit-role -- lazygit -p /media/pradeep/Data/projects/godot/gdtoolkit"
+bindsym $super+p exec "i3-msg workspace 9; $terminal --role=pydoro-role -- pydoro"
+bindsym $super+l exec "i3-msg workspace 10; $terminal --role=lazygit-role -- lazygit -p /media/pradeep/Data/projects/godot/gdtoolkit"
 
 
 # focus
@@ -243,8 +248,8 @@ for_window [class="Godot_Editor"] move to workspace 1
 exec "i3-msg workspace 4; nemo"
 exec "i3-msg workspace 4; nemo"
 
-exec "gnome-terminal --role=pydoro-role -- pydoro"
-exec "gnome-terminal --role=lazygit-role -- lazygit -p /media/pradeep/Data/projects/godot/gdtoolkit"
+exec "$terminal --role=pydoro-role -- pydoro"
+exec "$terminal --role=lazygit-role -- lazygit -p /media/pradeep/Data/projects/godot/gdtoolkit"
 
 exec "i3-msg workspace 1; $p_godot $p_proj;"
 exec "i3-msg workspace 1"
