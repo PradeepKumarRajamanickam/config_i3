@@ -198,6 +198,8 @@ set $p_proj /media/pradeep/Data/projects/godot/gdtoolkit/project.godot
 # ... (keybindings, etc.)
 bindsym $super+Escape exec "i3-msg exit"
 bindsym $shift+Escape exec "shutdown now"
+bindsym $super+$alt+c exec --no-startup-id python3 ~/.config/i3/scripts/center_mouse.py
+
 
 bindsym $super+t exec $terminal
 bindsym $super+$ctrl+c exec "code ~/.config/i3/config ~/.config/i3/"
