@@ -2,23 +2,22 @@
 import i3ipc
 import subprocess
 
+def center_mouse():
+    # Establish connection to i3 IPC
+    i3 = i3ipc.Connection()
+    
+    # Get the currently focused container
+    focused = i3.get_tree().find_focused()
+    
+    if focused and focused.rect:
+        rect = focused.rect
+        # Calculate the absolute center
+        center_x = rect.x + (rect.width / 2)
+        center_y = rect.y + (rect.height / 2)
 
-def on_window_focus(i3, e):
-    # Get the geometry (rect) of the focused container
-    rect = e.container.rect
+        # Move the mouse using xdotool
+        subprocess.run(['xdotool', 'mousemove', str(int(center_x)), str(int(center_y))])
+        print(f"Centered mouse on window: {focused.name}")
 
-    # Calculate the absolute center on the screen
-    center_x = rect.x + (rect.width / 2)
-    center_y = rect.y + (rect.height / 2)
-
-    # Move the mouse using absolute screen coordinates
-    subprocess.run(['xdotool', 'mousemove', str(
-        int(center_x)), str(int(center_y))])
-
-    window_id = e.container.window
-    print(f"center_mouse.py: i3 focus changed to window_id: {window_id}")
-
-
-i3 = i3ipc.Connection()
-i3.on('window::focus', on_window_focus)
-i3.main()
+if __name__ == "__main__":
+    center_mouse()
