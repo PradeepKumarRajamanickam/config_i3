@@ -189,6 +189,10 @@ bar {
         status_command i3status
 }
 
+# commands
+set $center_mouse exec --no-startup-id python3 ~/.config/i3/scripts/center_mouse.py
+set $run_or_focus_script exec --no-startup-id  python3 ~/.config/i3/scripts/run_or_focus.py
+
 # paths
 set $p_godot /media/pradeep/Data/Applications/Godot_v4.5.1-stable_linux.x86_64
 set $p_proj /media/pradeep/Data/projects/godot/gdtoolkit/project.godot
@@ -198,7 +202,9 @@ set $p_proj /media/pradeep/Data/projects/godot/gdtoolkit/project.godot
 # ... (keybindings, etc.)
 bindsym $super+Escape exec "i3-msg exit"
 bindsym $shift+Escape exec "shutdown now"
-bindsym $super+$alt+c exec --no-startup-id python3 ~/.config/i3/scripts/center_mouse.py
+bindsym $super+$alt+c $center_mouse
+
+bindsym $super+n $run_or_focus_script nemo -c Nemo
 
 
 bindsym $super+t exec $terminal
@@ -207,7 +213,7 @@ bindsym $super+$ctrl+c exec "code ~/.config/i3/config ~/.config/i3/"
 # bindsym $super+$ctrl+a exec "firefox --kiosk https://grok.com"
 
 
-bindsym $super+n exec "i3-msg workspace 4; nemo"
+# bindsym $super+n exec "i3-msg workspace 4; nemo"
 bindsym $super+b exec "i3-msg workspace 5; google-chrome"
 bindsym $super+g exec "i3-msg workspace 1; $p_godot $p_proj"
 bindsym $super+k exec "i3-msg workspace 8; $terminal --role=taskmanager-role -- htop"
