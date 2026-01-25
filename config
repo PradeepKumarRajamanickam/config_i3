@@ -107,7 +107,7 @@ bindsym $super+$shift+space floating toggle
 bindsym $super+space focus mode_toggle
 
 # focus the parent container
-bindsym $super+a focus parent
+# bindsym $super+a focus parent
 
 # focus the child container
 #bindsym $super+d focus child
@@ -191,48 +191,45 @@ bar {
 
 # commands
 set $center_mouse exec --no-startup-id python3 ~/.config/i3/scripts/center_mouse.py
-set $run_or_focus_script exec --no-startup-id  python3 ~/.config/i3/scripts/run_or_focus.py
+set $run_or_focus exec --no-startup-id python3 ~/.config/i3/scripts/run_or_focus.py
+set $run exec --no-startup-id
 
 # paths
 set $p_godot /media/pradeep/Data/Applications/Godot_v4.5.1-stable_linux.x86_64
 set $p_proj /media/pradeep/Data/projects/godot/gdtoolkit/project.godot
-
+set $godot $p_godot $p_proj
 # set $default_proj_godot "$p_godot44 $p_proj_fps"
 
 # ... (keybindings, etc.)
 bindsym $super+Escape exec "i3-msg exit"
 bindsym $shift+Escape exec "shutdown now"
-bindsym $super+$alt+c $center_mouse
+bindsym $super+$alt+v $center_mouse
 
-bindsym $super+n $run_or_focus_script nemo -c Nemo
 
 
 bindsym $super+t exec $terminal
 bindsym $super+$ctrl+c exec "code ~/.config/i3/config ~/.config/i3/"
 
-# bindsym $super+$ctrl+a exec "firefox --kiosk https://grok.com"
+bindsym $super+n $run_or_focus "nemo" -c "Nemo"
+bindsym $super+b $run_or_focus "google-chrome" -c "google-chrome"
 
+bindsym $super+k $run_or_focus "$terminal --role=taskmanager -- htop" -r "taskmanager"
+bindsym $super+p $run_or_focus "$terminal --role=pomo -- pydoro" -r "pomo"
+bindsym $super+l $run_or_focus "$terminal --role=vcs -- lazygit -p /media/pradeep/Data/projects/godot/gdtoolkit" -r "vcs"
 
-# bindsym $super+n exec "i3-msg workspace 4; nemo"
-bindsym $super+b exec "i3-msg workspace 5; google-chrome"
-bindsym $super+g exec "i3-msg workspace 1; $p_godot $p_proj"
-bindsym $super+k exec "i3-msg workspace 8; $terminal --role=taskmanager-role -- htop"
+bindsym $super+c $run_or_focus "code"
+bindsym $super+g $run_or_focus $godot -c "Godot"
+bindsym $super+x $run_or_focus $godot -c "Godot" -t "Inspector - Godot Engine"
+# bindsym $super+s $run_or_focus "$godot" -c "Godot" -t "Script Editor - Godot Engine"
+bindsym $super+a $run_or_focus $godot -c "Godot" -t "FileSystem - Godot Engine"
+bindsym $super+z $run_or_focus $godot -c "Godot" -t "Scene - Godot Engine"
+bindsym $super+i $run_or_focus $godot -c "Godot" -t "Import - Godot Engine"
+bindsym $super+o $run_or_focus $godot -c "Godot" -t "Node - Godot Engine"
 
-bindsym $super+p exec "i3-msg workspace 9; $terminal --role=pydoro-role -- pydoro"
-bindsym $super+l exec "i3-msg workspace 10; $terminal --role=lazygit-role -- lazygit -p /media/pradeep/Data/projects/godot/gdtoolkit"
-
-
-# focus
-bindsym $super+$alt+n [class="Nemo"] focus
-bindsym $super+$alt+b [window_role="browser"] focus
-
-bindsym $super+$alt+1 [class="Godot" instance="Godot_Editor"] focus
-bindsym $super+$alt+3 [class="Godot" instance="Godot_Editor" title="Inspector - Godot Engine"] focus
-bindsym $super+$alt+2 [class="Godot" instance="Godot_Editor" title="Script Editor - Godot Engine"] focus
-bindsym $super+$alt+4 [class="Godot" instance="Godot_Editor" title="Import - Godot Engine"] focus
-bindsym $super+$alt+5 [class="Godot" instance="Godot_Editor" title="FileSystem - Godot Engine"] focus
-bindsym $super+$alt+6 [class="Godot" instance="Godot_Editor" title="Node - Godot Engine"] focus
-bindsym $super+$alt+7 [class="Godot" instance="Godot_Editor" title="Scene - Godot Engine"] focus
+# more instance
+bindsym $super+$alt+c $run "code" focus
+bindsym $super+$alt+n $run "nemo" focus
+bindsym $super+$alt+b $run "google-chrome" focus
 
 # force
 for_window [window_role="browser"] move to workspace 5
