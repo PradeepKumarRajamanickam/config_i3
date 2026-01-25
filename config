@@ -269,6 +269,6 @@ workspace 0 output $bottom_screen
 
 
 # mouse centering
-mouse_warping output
+# mouse_warping output
 exec_always --no-startup-id python3 ~/.config/i3/scripts/center_mouse.py
 
