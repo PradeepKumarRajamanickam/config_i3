@@ -56,7 +56,7 @@ def run_or_focus(command, class_name=None, instance=None, title=None, role=None)
     tree = i3.get_tree()
     windows = tree.leaves()
     target = None
-
+    logger.info(f"Searching for window: class={class_name}, instance={instance}, title={title}, role={role}")
     # 1. Try to find existing window
     if class_name or instance or role or title:
         for w in windows:

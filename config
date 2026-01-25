@@ -196,9 +196,11 @@ set $run exec --no-startup-id
 
 # paths
 set $p_godot /media/pradeep/Data/Applications/Godot_v4.5.1-stable_linux.x86_64
-set $p_proj /media/pradeep/Data/projects/godot/gdtoolkit/project.godot
-set $godot $p_godot $p_proj
-# set $default_proj_godot "$p_godot44 $p_proj_fps"
+set $p_godot_proj /media/pradeep/Data/projects/godot/gdtoolkit/project.godot
+set $p_code_proj_dir /media/pradeep/Data/projects/godot/gdtoolkit
+
+# set $godot $p_godot $p_godot_proj # doesn't work in i3 config
+
 
 # ... (keybindings, etc.)
 # system behaviour
@@ -220,13 +222,13 @@ bindsym $super+v $run_or_focus "$terminal --role=vcs -- lazygit -p /media/pradee
 
 # dev apps
 bindsym $super+c $run_or_focus "code" -c "Code"
-bindsym $super+g $run_or_focus $godot -c "Godot_Editor"
-bindsym $super+x $run_or_focus $godot -c "Godot_Editor" -t "Inspector - Godot Engine"
-# bindsym $super+s $run_or_focus "$godot" -c "Godot_Editor" -t "Script Editor - Godot Engine"
-bindsym $super+a $run_or_focus $godot -c "Godot_Editor" -t "FileSystem - Godot Engine"
-bindsym $super+z $run_or_focus $godot -c "Godot_Editor" -t "Scene - Godot Engine"
-bindsym $super+i $run_or_focus $godot -c "Godot_Editor" -t "Import - Godot Engine"
-bindsym $super+o $run_or_focus $godot -c "Godot_Editor" -t "Node - Godot Engine"
+bindsym $super+g $run_or_focus "$p_godot $p_godot_proj" -t ".tscn -"
+bindsym $super+x $run_or_focus "$p_godot $p_godot_proj" -t "Inspector - Godot Engine"
+# bindsym $super+s $run_or_focus "$p_godot $p_godot_proj" -t "Script Editor - Godot Engine"
+bindsym $super+a $run_or_focus "$p_godot $p_godot_proj" -t "FileSystem - Godot Engine"
+bindsym $super+z $run_or_focus "$p_godot $p_godot_proj" -t "Scene - Godot Engine"
+bindsym $super+i $run_or_focus "$p_godot $p_godot_proj" -t "Import - Godot Engine"
+bindsym $super+o $run_or_focus "$p_godot $p_godot_proj" -t "Node - Godot Engine"
 
 # more instance
 bindsym $super+$alt+c $run "code" focus
@@ -248,7 +250,7 @@ for_window [class="Godot" instance="Godot_Editor" title="FileSystem - Godot Engi
 for_window [class="Godot" instance="Godot_Editor" title="Node - Godot Engine"] move to workspace 6
 for_window [class="Godot" instance="Godot_Editor" title="Inspector - Godot Engine"] move to workspace 6
 for_window [class="Godot" instance="Godot_Editor" title="Scene - Godot Engine"] move to workspace 6
-for_window [class="Godot_Editor"] move to workspace 1
+for_window [class="Godot" title=".tscn -"] move to workspace 1
 
 # startup
 
@@ -258,7 +260,8 @@ exec "i3-msg workspace 4; nemo"
 exec "$terminal --role=pomo -- pydoro"
 exec "$terminal --role=vcs -- lazygit -p /media/pradeep/Data/projects/godot/gdtoolkit"
 
-exec "i3-msg workspace 1; $p_godot $p_proj;"
+exec "code $p_code_proj_dir"
+exec "i3-msg workspace 1; $p_godot $p_godot_proj; move to workspace 1"
 exec "i3-msg workspace 1"
 
 
