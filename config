@@ -199,10 +199,11 @@ bindsym $super+$shift+e exec "i3-msg exit"
 bindsym $super+$ctrl+c exec "code ~/.config/i3/config"
 # bindsym $super+$ctrl+a exec "firefox --kiosk https://grok.com"
 
+
 bindsym $super+n exec "i3-msg workspace 4; nemo"
 bindsym $super+b exec "i3-msg workspace 5; google-chrome"
 bindsym $super+g exec "i3-msg workspace 1; $p_godot $p_proj"
-bindsym $super+t exec "i3-msg workspace 8; gnome-terminal --role=taskmanager-role -- htop"
+bindsym $super+k exec "i3-msg workspace 8; gnome-terminal --role=taskmanager-role -- htop"
 
 bindsym $super+p exec "i3-msg workspace 9; gnome-terminal --role=pydoro-role -- pydoro"
 bindsym $super+l exec "i3-msg workspace 10; gnome-terminal --role=lazygit-role -- lazygit -p /media/pradeep/Data/projects/godot/gdtoolkit"
@@ -268,7 +269,7 @@ workspace 9 output $bottom_screen
 workspace 0 output $bottom_screen
 
 
-# mouse centering
-# mouse_warping output
-exec_always --no-startup-id python3 ~/.config/i3/scripts/center_mouse.py
+# on focus events
+# center mouse on window focus
+exec_always --no-startup-id python3 ~/.config/i3/scripts/on_window_focus.py
 
