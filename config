@@ -260,19 +260,38 @@ exec "i3-msg workspace 4; nemo"
 exec "$terminal --role=pomo -- pydoro"
 exec "$terminal --role=vcs -- lazygit -p /media/pradeep/Data/projects/godot/gdtoolkit"
 
-exec "code $p_code_proj_dir"
+# exec "code $p_code_proj_dir"
 exec "i3-msg workspace 1; $p_godot $p_godot_proj; move to workspace 1"
 exec "i3-msg workspace 1"
 
 
-# multi-monitor
 
-exec_always --no-startup-id ~/.screenlayout/single_monitor.sh
+# on focus events
+# center mouse on window focus
+exec --no-startup-id python3 ~/.config/i3/scripts/on_window_focus.py
 
+# MONITOR SETUP
 set $top_screen HDMI-1
 set $bottom_screen eDP-1
 
-workspace 1 output $bottom_screen
+# # single-monitor
+# exec_always --no-startup-id ~/.screenlayout/single_monitor.sh
+
+# workspace 1 output $bottom_screen
+# workspace 2 output $bottom_screen
+# workspace 3 output $bottom_screen
+# workspace 4 output $bottom_screen
+# workspace 5 output $bottom_screen
+# workspace 6 output $bottom_screen
+# workspace 7 output $bottom_screen
+# workspace 8 output $bottom_screen
+# workspace 9 output $bottom_screen
+# workspace 0 output $bottom_screen
+
+# dual-monitor
+exec_always --no-startup-id ~/.screenlayout/dual_monitor.sh
+
+workspace 1 output $top_screen
 workspace 2 output $bottom_screen
 workspace 3 output $bottom_screen
 workspace 4 output $bottom_screen
@@ -282,9 +301,3 @@ workspace 7 output $bottom_screen
 workspace 8 output $bottom_screen
 workspace 9 output $bottom_screen
 workspace 0 output $bottom_screen
-
-
-# on focus events
-# center mouse on window focus
-exec_always --no-startup-id python3 ~/.config/i3/scripts/on_window_focus.py
-
