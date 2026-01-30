@@ -207,6 +207,8 @@ set $p_code_proj_dir /media/pradeep/Data/projects/godot/gdtoolkit
 bindsym $super+Escape exec "i3-msg exit"
 bindsym $shift+Escape exec "shutdown now"
 bindsym $super+$alt+v $center_mouse
+bindsym $super+Tab focus right
+bindsym $super+$shift+Tab focus left
 
 # basic apps
 bindsym $super+t exec $terminal
