@@ -270,6 +270,7 @@ exec "$terminal --role=vcs -- lazygit -p /media/pradeep/Data/projects/godot/gdto
 # exec "code $p_code_proj_dir"
 exec "i3-msg workspace 1; $p_godot $p_godot_proj; move to workspace 1"
 exec "i3-msg workspace 1"
+exec "i3-msg workspace 2"
 
 
 
