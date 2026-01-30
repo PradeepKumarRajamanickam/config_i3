@@ -244,7 +244,12 @@ for_window [window_role="pomo"] move to workspace 9
 for_window [window_role="taskmanager"] move to workspace 8
 
 for_window [class="Nemo"] move to workspace 4
-for_window [class="Code"] move to workspace 2
+for_window [class="Code"] move to workspace 7
+
+# force - dialogs - godot
+for_window [class="Godot" title="Open Scene"]floating disabled, focus, fullscreen enable
+for_window [class="Godot" title="Save Scene As..."] floating disabled, focus, fullscreen enable
+for_window [class="Godot" title="Select Resource"] floating disabled, focus, fullscreen enable
 
 for_window [class="Godot" instance="Godot_Editor" title="Script Editor - Godot Engine"] move to workspace 2
 for_window [class="Godot" instance="Godot_Editor" title="Import - Godot Engine"] move to workspace 3
